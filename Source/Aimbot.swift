@@ -32,8 +32,20 @@ final class Aimbot {
         return best
     }
 
+    func aimPoint(for target: PlayerEntity) -> SIMD3<Float> {
+        let wanted = SkeletonLayout.aimIndex(for: config.aimPart)
+        if let bone = target.bones.first(where: { $0.index == wanted }) {
+            return bone.worldPos
+        }
+        let fallback = SkeletonLayout.headBoneIndex
+        if let bone = target.bones.first(where: { $0.index == fallback }) {
+            return bone.worldPos
+        }
+        return target.position + SIMD3<Float>(0, 1.6, 0)
+    }
+
     func aimOffset(for target: PlayerEntity, screen: CGSize) -> CGPoint? {
-        guard let point = ESPProjector.shared.project(world: target.position,
+        guard let point = ESPProjector.shared.project(world: aimPoint(for: target),
                                                       camera: GameSession.shared.camera,
                                                       screen: screen) else { return nil }
         let center = CGPoint(x: screen.width / 2, y: screen.height / 2)
