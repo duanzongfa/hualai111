@@ -66,6 +66,7 @@ final class GameSession {
 
     private func refreshGameData() {
         let base = MemoryOffsets.gameBaseAddress
+        AddressResolver.shared.update(fromImageBase: base)
         guard base != 0 else { buildDemoFrame(); return }
 
         var list: [PlayerEntity] = []
@@ -86,7 +87,7 @@ final class GameSession {
             var bones: [BonePoint] = []
             if offsets.bonesOffset != 0 {
                 for boneIndex in 0..<offsets.boneCount {
-                    let boneAddr = entityPtr + offsets.bonesOffset + UInt64(boneIndex) * 12
+                    let boneAddr = entityPtr + offsets.bonesOffset + UInt64(boneIndex) * offsets.boneStride
                     if let bonePos = reader.readVec3(boneAddr) {
                         bones.append(BonePoint(index: boneIndex, worldPos: bonePos))
                     }
