@@ -9,7 +9,7 @@ final class IPCManager {
 
         CFNotificationCenterPostNotification(
             CFNotificationCenterGetDarwinNotifyCenter(),
-            name as CFString,
+            CFNotificationName(name as CFString),
             nil, nil, true
         )
         NotificationCenter.default.post(name: Notification.Name(name), object: nil, userInfo: payload)
