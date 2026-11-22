@@ -44,9 +44,7 @@ final class GameSession {
 
     private func tick() {
         if !reader.isAttached || gamePid == 0 {
-            guard let pid = Self.findProcess(named: BinaryAnalysis.targetProcessName)
-                    ?? Self.findProcess(named: "DeltaForce")
-                    ?? Self.findProcess(prefix: BinaryAnalysis.bundlePrefix) else {
+            guard let pid = Self.locateGameProcess() else {
                 lastError = "未找到游戏进程"
                 buildDemoFrame()
                 return
@@ -147,6 +145,18 @@ final class GameSession {
                                      isBot: i % 2 == 0))
         }
         players = list
+    }
+
+    static func locateGameProcess() -> pid_t? {
+        if let pid = findProcess(named: BinaryAnalysis.targetProcessName) { return pid }
+        do {
+            for info in allProcesses() {
+                for prefix in BinaryAnalysis.targetBundlePrefixes where info.name.hasPrefix(prefix) {
+                    return info.pid
+                }
+            }
+        }
+        return nil
     }
 
     static func findProcess(named name: String) -> pid_t? {
