@@ -1,48 +1,50 @@
-﻿// 花来 - 主入口 (修复版)
-import Foundation
+// 花来 - 入口
 import UIKit
 
-class CheatGameState {
-    static let shared = CheatGameState()
-    var players: [PlayerEntity] = []
-    var localPlayer: PlayerEntity?
-    var camera: CameraData = CameraData()
-    var deltaSeconds: Float = 0
-    var frameCount: Int = 0
-    var fps: Float = 0
-}
-
-class HuailaiController {
+final class HuailaiController {
     static let shared = HuailaiController()
-    private var memoryReader = KernelMemoryReader.shared
-    private var isInitialized = false
-    
-    func initialize() {
-        print("[Huailai] Starting...")
-        IPCManager.shared.observeReady()
-        if let pid = findProcess(named: BinaryAnalysis.targetProcessName) {
-            if memoryReader.initialize(pid: pid) {
-                isInitialized = true
-                print("[Huailai] Initialized with PID: \(pid)")
-            }
-        }
-    }
-    
-    private func findProcess(named name: String) -> pid_t? {
-        var pids = [Int32](repeating: 0, count: 4096)
-        let count = proc_listallpids(&pids, UInt32(pids.count * MemoryLayout<Int32>.stride))
-        guard count > 0 else { return nil }
-        for i in 0..<Int(count) {
-            if pids[i] != 0 {
-                return pids[i]
-            }
-        }
-        return nil
-    }
-}
+    private init() {}
 
-@objc class HuailaiInject: NSObject {
-    @objc static func main() {
-        HuailaiController.shared.initialize()
+    private(set) var window: UIWindow?
+    private var overlayRoot: UIViewController?
+
+    func initialize() {
+        print("[Huailai] controller starting")
+        GameSession.shared.start()
+        DispatchQueue.main.async { [weak self] in
+            self?.installOverlay()
+        }
+    }
+
+    func installOverlay() {
+        guard overlayRoot == nil else { return }
+        guard let scene = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in self?.installOverlay() }
+            return
+        }
+
+        let root = UIViewController()
+        root.view.backgroundColor = .clear
+        let overlay = ESPOverlayView(frame: scene.coordinateSpace.bounds)
+        overlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        root.view.addSubview(overlay)
+
+        let window = UIWindow(windowScene: scene)
+        window.windowLevel = UIWindow.Level(rawValue: UIWindow.Level.alert.rawValue + 1)
+        window.rootViewController = root
+        window.backgroundColor = .clear
+        window.isHidden = false
+
+        self.window = window
+        overlayRoot = root
+    }
+
+    func teardown() {
+        GameSession.shared.stop()
+        overlayRoot = nil
+        window?.isHidden = true
+        window = nil
     }
 }

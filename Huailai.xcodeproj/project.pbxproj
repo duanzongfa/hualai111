@@ -1,0 +1,309 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB0000000000000000000101 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000101 /* AppDelegate.swift */; };
+		BB0000000000000000000103 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000103 /* Config.swift */; };
+		BB0000000000000000000104 /* MemoryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000104 /* MemoryReader.swift */; };
+		BB0000000000000000000105 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000105 /* GameSession.swift */; };
+		BB0000000000000000000106 /* ESPRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000106 /* ESPRenderer.swift */; };
+		BB0000000000000000000107 /* Aimbot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000107 /* Aimbot.swift */; };
+		BB0000000000000000000108 /* IPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000108 /* IPCManager.swift */; };
+		BB0000000000000000000109 /* DYLDHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000109 /* DYLDHook.swift */; };
+		BB0000000000000000000110 /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000110 /* MetalRenderer.swift */; };
+		BB0000000000000000000111 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000111 /* Theme.swift */; };
+		BB0000000000000000000112 /* ControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000112 /* ControlPanel.swift */; };
+		BB0000000000000000000113 /* ESPOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000113 /* ESPOverlayView.swift */; };
+		BB0000000000000000000114 /* Huailai.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000114 /* Huailai.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA0000000000000000000007 /* Huailai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Huailai.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000101 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA0000000000000000000102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA0000000000000000000103 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		AA0000000000000000000104 /* MemoryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryReader.swift; sourceTree = "<group>"; };
+		AA0000000000000000000105 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
+		AA0000000000000000000106 /* ESPRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPRenderer.swift; sourceTree = "<group>"; };
+		AA0000000000000000000107 /* Aimbot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aimbot.swift; sourceTree = "<group>"; };
+		AA0000000000000000000108 /* IPCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCManager.swift; sourceTree = "<group>"; };
+		AA0000000000000000000109 /* DYLDHook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYLDHook.swift; sourceTree = "<group>"; };
+		AA0000000000000000000110 /* MetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalRenderer.swift; sourceTree = "<group>"; };
+		AA0000000000000000000111 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		AA0000000000000000000112 /* ControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanel.swift; sourceTree = "<group>"; };
+		AA0000000000000000000113 /* ESPOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPOverlayView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000114 /* Huailai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Huailai.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA000000000000000000000F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA0000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000004 /* Huailai */,
+				AA0000000000000000000005 /* Source */,
+				AA0000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000007 /* Huailai.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000004 /* Huailai */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000101 /* AppDelegate.swift */,
+				AA0000000000000000000102 /* Info.plist */,
+			);
+			path = Huailai;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000005 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000103 /* Config.swift */,
+				AA0000000000000000000104 /* MemoryReader.swift */,
+				AA0000000000000000000105 /* GameSession.swift */,
+				AA0000000000000000000106 /* ESPRenderer.swift */,
+				AA0000000000000000000107 /* Aimbot.swift */,
+				AA0000000000000000000108 /* IPCManager.swift */,
+				AA0000000000000000000109 /* DYLDHook.swift */,
+				AA0000000000000000000110 /* MetalRenderer.swift */,
+				AA0000000000000000000111 /* Theme.swift */,
+				AA0000000000000000000112 /* ControlPanel.swift */,
+				AA0000000000000000000113 /* ESPOverlayView.swift */,
+				AA0000000000000000000114 /* Huailai.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA0000000000000000000006 /* Huailai */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA000000000000000000000B /* Build configuration list for PBXNativeTarget "Huailai" */;
+			buildPhases = (
+				AA000000000000000000000E /* Sources */,
+				AA000000000000000000000F /* Frameworks */,
+				AA0000000000000000000010 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Huailai;
+			productName = Huailai;
+			productReference = AA0000000000000000000007 /* Huailai.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					AA0000000000000000000006 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = AA0000000000000000000008 /* Build configuration list for PBXProject "Huailai" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = zh_CN;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				zh_CN,
+				Base,
+			);
+			mainGroup = AA0000000000000000000002;
+			productRefGroup = AA0000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA0000000000000000000006 /* Huailai */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA0000000000000000000010 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA000000000000000000000E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000101 /* AppDelegate.swift in Sources */,
+				BB0000000000000000000103 /* Config.swift in Sources */,
+				BB0000000000000000000104 /* MemoryReader.swift in Sources */,
+				BB0000000000000000000105 /* GameSession.swift in Sources */,
+				BB0000000000000000000106 /* ESPRenderer.swift in Sources */,
+				BB0000000000000000000107 /* Aimbot.swift in Sources */,
+				BB0000000000000000000108 /* IPCManager.swift in Sources */,
+				BB0000000000000000000109 /* DYLDHook.swift in Sources */,
+				BB0000000000000000000110 /* MetalRenderer.swift in Sources */,
+				BB0000000000000000000111 /* Theme.swift in Sources */,
+				BB0000000000000000000112 /* ControlPanel.swift in Sources */,
+				BB0000000000000000000113 /* ESPOverlayView.swift in Sources */,
+				BB0000000000000000000114 /* Huailai.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA0000000000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu14;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA000000000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu14;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA000000000000000000000C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Huailai/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huailai.deltaforce;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA000000000000000000000D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Huailai/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huailai.deltaforce;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA0000000000000000000008 /* Build configuration list for PBXProject "Huailai" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000009 /* Debug */,
+				AA000000000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA000000000000000000000B /* Build configuration list for PBXNativeTarget "Huailai" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000000000000000000000C /* Debug */,
+				AA000000000000000000000D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA0000000000000000000001 /* Project object */;
+}

@@ -1,10 +1,10 @@
-﻿// 花来 - dyld Hook (修复版)
+// 花来 - 注入辅助
 import Foundation
 import Darwin
 
-class DYLDHook {
-    static let shared = DYLDHook()
-    func hook() {
-        print("[Huailai] dyld hook installed")
+enum InjectHelper {
+    static func locateGameBinary() -> String? {
+        guard let pid = GameSession.findProcess(named: BinaryAnalysis.targetProcessName) else { return nil }
+        return "/proc/\(pid)"
     }
 }
