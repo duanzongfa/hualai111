@@ -1,12 +1,13 @@
 // 花来 - 内存读取器
 import Foundation
 import Darwin
+import simd
 
 final class KernelMemoryReader {
     static let shared = KernelMemoryReader()
 
     private(set) var targetPid: pid_t = 0
-    private var targetTask: task_t = MACH_PORT_NULL
+    private var targetTask: task_t = task_t(0)
     private var kreadFn: ((UInt64, UnsafeMutableRawPointer, Int) -> Int32)?
 
     private typealias KRWRead = @convention(c) (UInt64, UnsafeMutableRawPointer, Int) -> Int32
@@ -16,10 +17,9 @@ final class KernelMemoryReader {
     @discardableResult
     func attach(pid: pid_t) -> Bool {
         detach()
-        var task: task_t = MACH_PORT_NULL
-        guard task_for_pid(mach_task_self_, pid, &task) == KERN_SUCCESS, task != MACH_PORT_NULL else {
-            return false
-        }
+        var task = task_t(0)
+        let kr = task_for_pid(mach_task_self_, pid, &task)
+        guard kr == KERN_SUCCESS, task != 0 else { return false }
         targetPid = pid
         targetTask = task
         loadKernelReader()
@@ -27,10 +27,10 @@ final class KernelMemoryReader {
     }
 
     func detach() {
-        if targetTask != MACH_PORT_NULL {
+        if targetTask != 0 {
             mach_port_deallocate(mach_task_self_, targetTask)
         }
-        targetTask = MACH_PORT_NULL
+        targetTask = task_t(0)
         targetPid = 0
     }
 
@@ -57,14 +57,14 @@ final class KernelMemoryReader {
             return true
         }
 
-        guard targetTask != MACH_PORT_NULL else { return false }
-        var readSize: mach_vm_size_t = 0
-        let kr = mach_vm_read_overwrite(targetTask,
-                                        mach_vm_address_t(address),
-                                        mach_vm_size_t(size),
-                                        mach_vm_address_t(UInt(bitPattern: buffer)),
-                                        &readSize)
-        return kr == KERN_SUCCESS && readSize == mach_vm_size_t(size)
+        guard targetTask != 0 else { return false }
+        var copied: vm_size_t = 0
+        let kr = vm_read_overwrite(targetTask,
+                                   vm_address_t(address),
+                                   vm_size_t(size),
+                                   vm_address_t(UInt(bitPattern: buffer)),
+                                   &copied)
+        return kr == KERN_SUCCESS && copied == vm_size_t(size)
     }
 
     func readU32(_ address: UInt64) -> UInt32? {
