@@ -1,4 +1,4 @@
-﻿name: Build Huailai
+name: Build Huailai
 
 on:
   push:
@@ -13,34 +13,34 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version:  \15.0\'
+        xcode-version: '15.0'
         
     - name: Build for iOS
       run: |
-        cd Huailai-Fixed
+        cd Source
         xcodebuild build \
           -project Huailai.xcodeproj \
           -scheme Huailai \
           -configuration Release \
           -sdk iphoneos \
-          -destination \generic/platform=iOS\' \
+          -destination 'generic/platform=iOS' \
           CODE_SIGNING_ALLOWED=NO \
-          derivedDataPath=build
+          derivedDataPath=../build
           
     - name: Package IPA
       run: |
-        cd Huailai-Fixed/build/Build/Products/Release-iphoneos
+        cd Source
         mkdir -p ../Payload
-        cp -r Huailai.app ../Payload/
-        zip -r ../../花来.ipa Payload/
+        cp -r ../build/Build/Products/Release-iphoneos/Huailai.app ../Payload/
+        zip -r ../花来.ipa Payload/
         
     - name: Upload IPA
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: huailai-ipa
-        path: Huailai-Fixed/花来.ipa
+        path: Source/花来.ipa
