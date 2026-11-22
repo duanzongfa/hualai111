@@ -1,0 +1,30 @@
+﻿{
+  "name": "Huailai",
+  "version": "1.0.0",
+  "description": "三角洲行动游戏辅助 - 透视/自瞄",
+  "platform": "iOS",
+  "target_os": "15.0+",
+  "architecture": "arm64",
+  "source_files": [
+    "Source/Config.swift",
+    "Source/MemoryReader.swift",
+    "Source/MetalRenderer.swift",
+    "Source/ESPRenderer.swift",
+    "Source/Aimbot.swift",
+    "Source/IPCManager.swift",
+    "Source/Huailai.swift",
+    "Source/DYLDHook.swift"
+  ],
+  "features": {
+    "esp": {
+      "enabled": true,
+      "targets": ["player", "enemy", "loot"],
+      "render": "metal"
+    },
+    "aimbot": {
+      "enabled": true,
+      "mode": "static",
+      "fov": 360
+    }
+  }
+}
