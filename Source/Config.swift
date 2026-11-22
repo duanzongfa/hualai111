@@ -5,6 +5,8 @@ import CoreGraphics
 import simd
 
 enum BinaryAnalysis {
+    // 原版 ESPOnlyPureTrollLive (樱-R44 / Hikari20) 逆向所得函数地址
+    // 这些是作弊本体 ARM64 二进制内 __TEXT 段地址，非游戏内存偏移
     static let drawGameAddr: UInt64 = 0x1001d807c
     static let onEspStatsAddr: UInt64 = 0x100035c60
     static let toggleWindowAddr: UInt64 = 0x1000904b4
@@ -12,8 +14,73 @@ enum BinaryAnalysis {
     static let renderBootLogoAddr: UInt64 = 0x100011490
     static let injectHookAddr: UInt64 = 0x100013940
     static let initOffsetsAddr: UInt64 = 0x10032d0f0
+    static let usesPureTrollAddr: UInt64 = 0x100067a10
+    static let isTweakInjectionEnabledAddr: UInt64 = 0x1000236c8
+    static let respringAddr: UInt64 = 0x100022de8
+
+    static let originalImageBase: UInt64 = 0x100000000
+    static let originalTextVMAddr: UInt64 = 0x100000000
+
     static let targetProcessName = "DeltaForce"
-    static let bundlePrefix = "com.tencent"
+    static let targetBundlePrefixes = ["com.tencent", "com.garena", "com.proxima"]
+
+    static func rebase(_ address: UInt64, slide: UInt64) -> UInt64 {
+        return address + slide
+    }
+
+    static func fileOffset(ofVMAccess address: UInt64) -> UInt64 {
+        return address - originalTextVMAddr
+    }
+}
+
+// 原版二进制内的骨骼常量
+enum SkeletonLayout {
+    static let headBoneIndex: Int = 9
+    static let serverBoneCount: Int = 30
+    static let clientBoneCount: Int = 25
+
+    static let hips = 0
+    static let spine = 3
+    static let chest = 6
+    static let neck = 8
+    static let head = 9
+
+    static func aimIndex(for part: AimPart) -> Int {
+        switch part {
+        case .head: return head
+        case .neck: return neck
+        case .chest: return chest
+        case .stomach: return spine
+        case .pelvis: return hips
+        }
+    }
+}
+
+// 原版函数地址 -> 运行时重定位
+final class AddressResolver {
+    static let shared = AddressResolver()
+    private var slide: UInt64 = 0
+    private(set) var imageBase: UInt64 = 0
+
+    private init() {}
+
+    func update(fromImageBase base: UInt64) {
+        imageBase = base
+        slide = base >= BinaryAnalysis.originalImageBase ? base - BinaryAnalysis.originalImageBase : 0
+    }
+
+    var gameSlide: UInt64 { slide }
+
+    var drawGame: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.drawGameAddr, slide: slide) }
+    var onEspStats: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.onEspStatsAddr, slide: slide) }
+    var toggleWindow: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.toggleWindowAddr, slide: slide) }
+    var openAfterHUD: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.openAfterHUDAddr, slide: slide) }
+    var renderBootLogo: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.renderBootLogoAddr, slide: slide) }
+    var injectHook: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.injectHookAddr, slide: slide) }
+    var initOffsets: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.initOffsetsAddr, slide: slide) }
+    var usesPureTroll: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.usesPureTrollAddr, slide: slide) }
+    var isTweakInjectionEnabled: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.isTweakInjectionEnabledAddr, slide: slide) }
+    var respring: UInt64 { BinaryAnalysis.rebase(BinaryAnalysis.respringAddr, slide: slide) }
 }
 
 enum ReadMode: String {
@@ -97,11 +164,13 @@ enum IPCNotification: String {
 }
 
 struct MemoryOffsets {
-    static var gameBaseAddress: UInt64 = 0x100000000
+    // 内核静态基址 (来自原版 jbinfo / XPF 偏移字典)
+    static var gameBaseAddress: UInt64 = BinaryAnalysis.originalImageBase
     static var kernelStaticBase: UInt64 = 0x0
     static var sptmBase: UInt64 = 0x0
     static var txmBase: UInt64 = 0x0
 
+    // 以下游戏内偏移原版二进制中未硬编码，需按当前游戏版本定位后填入
     var playerListBase: UInt64 = 0x0
     var localPlayerOffset: UInt64 = 0x0
     var entityListOffset: UInt64 = 0x0
@@ -116,7 +185,14 @@ struct MemoryOffsets {
     var visibilityOffset: UInt64 = 0x0
     var positionOffset: UInt64 = 0x0
     var bonesOffset: UInt64 = 0x0
-    var boneCount: Int = 25
+
+    // 原版常量
+    var boneCount: Int = SkeletonLayout.clientBoneCount
+    var boneStride: UInt64 = 12
+
+    var isResolved: Bool {
+        playerListBase != 0 && positionOffset != 0 && healthOffset != 0
+    }
 }
 
 struct BonePoint {
